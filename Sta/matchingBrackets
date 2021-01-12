@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+
+namespace matchingBrackets
+{
+    class matchingBrackets
+    {
+        static void Main(string[] args)
+        {
+            string input = Console.ReadLine();
+            Stack<int> index = new Stack<int>();
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (input[i] == '(')
+                {
+                    index.Push(i);
+                }
+                else if (input[i] == ')')
+                {
+                    var leftIndex = index.Pop();
+                    var expression = input.Substring(leftIndex, i - leftIndex + 1);
+                    Console.WriteLine(expression);
+                }
+            }
+            
+            
+         
+        }
+    }
+}
