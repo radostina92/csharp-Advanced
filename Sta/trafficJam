@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+
+namespace trafficJam
+{
+    class trafficJam
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            var queue = new Queue<string>();
+            int cnt = 0;
+            while (true)
+            {
+                var command = Console.ReadLine();
+                if (command == "end")
+                {
+                    break;
+                }
+                else if (command == "green")
+                {
+                    for (int i = 0; i < n; i++)
+                    {
+                        if (queue.Count > 0)
+                        {
+                            var car = queue.Dequeue();
+                            cnt++;
+                            Console.WriteLine($"{car} passed!");
+
+                        }
+                        
+                    }
+                }
+                else
+                {
+                    queue.Enqueue(command);
+                }
+            }
+            Console.WriteLine($"{cnt} cars passed the crossroads.");
+        }
+    }
+}
