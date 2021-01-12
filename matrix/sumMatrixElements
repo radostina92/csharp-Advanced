@@ -1,0 +1,30 @@
+using System;
+using System.Linq;
+
+namespace SumMatrixElements
+{
+    class SumMatrixElements
+    {
+        static void Main(string[] args)
+        {
+            string[] dimentions = Console.ReadLine().Split(", ");
+            int rows = int.Parse(dimentions[0]);
+            int col = int.Parse(dimentions[1]);
+            Console.WriteLine(rows);
+            Console.WriteLine(col);
+            int[,] matrix = new int[rows, col];
+            for (int i = 0; i < rows; i++)
+            {
+                string line = Console.ReadLine();
+                var elements = line.Split(", ");
+                for (int j = 0; j < col; j++)
+                {
+                    matrix[i, j] = int.Parse(elements[j]);
+                }
+
+            }
+            
+            Console.WriteLine(matrix.Cast<int>().Sum());
+        }
+    }
+}
