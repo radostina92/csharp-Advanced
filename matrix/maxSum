@@ -1,0 +1,86 @@
+using System;
+using System.Collections.Generic;
+
+namespace maximalSum
+{
+    class maximalSum
+    {
+        static void Main(string[] args)
+        {
+            var input = Console.ReadLine().Split();
+            var rows = int.Parse(input[0]);
+            var cols = int.Parse(input[1]);
+            var matrix = new int[rows, cols];
+            var first = new List<int>();
+            var second = new List<int>();
+            var third = new List<int>();
+            for (int i = 0; i < rows; i++)
+            {
+                var lines = Console.ReadLine();
+                var info = lines.Split();
+                for (int j = 0; j < cols; j++)
+                {
+                    matrix[i, j] = int.Parse(info[j]);
+                }
+            }
+
+            int maxSum = int.MinValue;
+            int sum = 0;
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    if (i < rows - 2 && j < cols - 2)
+                    {
+                        sum = matrix[i, j] + matrix[i, j + 1] + matrix[i, j + 2] +
+                        matrix[i + 1, j] + matrix[i + 1, j + 1] + matrix[i + 1, j + 2] +
+                        matrix[i + 2, j] + matrix[i + 2, j + 1] + matrix[i + 2, j + 2];
+
+                        int a = matrix[i, j];
+                        int b = matrix[i, j + 1];
+                        int c = matrix[i, j + 2];
+                        int d = matrix[i + 1, j];
+                        int e = matrix[i + 1, j + 1];
+                        int f = matrix[i + 1, j + 2];
+                        int g = matrix[i + 2, j];
+                        int h = matrix[i + 2, j + 1];
+                        int k = matrix[i + 2, j + 2];
+
+                        if (sum > maxSum)
+                        {
+                            maxSum = sum;
+                            if (first.Count > 0)
+                            {
+                                first.Clear();
+                            }
+                            if (second.Count > 0)
+                            {
+                                second.Clear();
+                            }
+                            if (third.Count > 0)
+                            {
+                                third.Clear();
+                            }
+
+                            first.Add(a);
+                            first.Add(b);
+                            first.Add(c);
+                            second.Add(d);
+                            second.Add(e);
+                            second.Add(f);
+                            third.Add(g);
+                            third.Add(h);
+                            third.Add(k);
+                     
+                        }
+                    }
+                   
+                }
+            }
+            Console.WriteLine($"Sum = {maxSum}");
+            Console.WriteLine(string.Join(" ",first));
+            Console.WriteLine(string.Join(" ", second));
+            Console.WriteLine(string.Join(" ", third));
+        }
+    }
+}
