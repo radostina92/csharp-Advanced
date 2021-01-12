@@ -1,0 +1,59 @@
+using System;
+
+namespace matrixShuffling
+{
+    class matrixShuffling
+    {
+        static void Main(string[] args)
+        {
+            var input = Console.ReadLine().Split();
+            var rows = int.Parse(input[0]);
+            var cols = int.Parse(input[1]);
+            var matrix = new string[rows, cols];
+            for (int i = 0; i < rows; i++)
+            {
+                var lines = Console.ReadLine().Split();
+                for (int j = 0; j < cols; j++)
+                {
+                    matrix[i, j] = lines[j];
+                }
+            }
+            string command = string.Empty;
+            while ((command = Console.ReadLine()) != "END")
+            {
+                var info = command.Split();
+                var whatIs = info[0];
+                if (whatIs == "swap" && info.Length == 5 )
+                {
+                    var first = int.Parse(info[1]);
+                    var second = int.Parse(info[2]);
+                    var third = int.Parse(info[3]);
+                    var fourth = int.Parse(info[4]);
+                    //0 0 0 1
+                    if (first > rows && first > cols && second > rows && second > cols &&
+                        third > rows && third > cols && fourth > rows && fourth > cols)
+                    {
+                        Console.WriteLine("Invalid input!");
+                        continue;
+                    }
+                    var item = matrix[first, second];
+                    matrix[first, second] = matrix[third, fourth];
+                    matrix[third, fourth] = item;
+
+                    for (int i = 0; i < rows; i++)
+                    {
+                        for (int j = 0; j < cols; j++)
+                        {
+                            Console.Write(matrix[i,j] + " ");
+                        }
+                        Console.WriteLine();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input!");
+                }
+            }
+        }
+    }
+}
