@@ -1,0 +1,75 @@
+using System;
+using System.Linq;
+
+namespace jaggedArrayManipulator
+{
+    class jaggedArrayManipulator
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            double[][] numbers = new double[n][];
+            for (int i = 0; i < n; i++)
+            {
+                numbers[i] = Console.ReadLine().Split().Select(double.Parse).ToArray(); 
+            }
+            Analyze(numbers);
+            string command = string.Empty;
+            while ((command = Console.ReadLine()) != "End")
+            {
+                string[] cmdInfo = command.Split();
+                int targetRow = int.Parse(cmdInfo[1]);
+                int targetCol = int.Parse(cmdInfo[2]);
+                int value = int.Parse(cmdInfo[3]);
+                if (!isInside(numbers, targetRow, targetCol))
+                {
+                    continue;
+                }
+                if (cmdInfo[0] == "Add") 
+                {
+                    numbers[targetRow][targetCol] += value; 
+                }
+                else
+                {
+                    numbers[targetRow][targetCol] -= value;
+                }
+            }
+            foreach (var item in numbers)
+            {
+                Console.WriteLine(string.Join(" ",item));
+            }
+        }
+
+        private static bool isInside(double[][] numbers,int targetRow, int targetCol)
+        {
+            return targetRow >= 0 && targetRow < numbers.Length && targetCol >= 0 && targetCol < numbers[targetRow].Length;
+        }
+
+        private static void Analyze(double[][] numbers)
+        {
+            for (int i = 0; i < numbers.Length - 1; i++)
+            {
+                if (numbers[i].Length == numbers[i + 1].Length)
+                {
+                    for (int j = 0; j < numbers[i].Length; j++)
+                    {
+                        numbers[i][j] *= 2;
+                        numbers[i + 1][j] *= 2;
+                    }
+                }
+                else
+                {
+                    for (int j = 0; j < numbers[i].Length; j++)
+                    {
+                        numbers[i][j] /= 2;
+                        
+                    }
+                    for (int j = 0; j < numbers[i + 1].Length; j++)
+                    {
+                        numbers[i + 1][j] /= 2;
+                    }
+                }
+            }
+        }
+    }
+}
