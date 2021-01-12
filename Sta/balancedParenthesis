@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+
+namespace balancedParantheses
+{
+    class balancedParantheses
+    {
+        static void Main(string[] args)
+        {
+            string input = Console.ReadLine();
+
+            Dictionary<char, char> pairsBrackets = new Dictionary<char, char>
+               { { '{', '}' }, { '(', ')' }, { '[', ']' } };
+            if (input.Length % 2 != 0)
+            {
+                Console.WriteLine("NO");
+                return;
+            }
+            Stack<char> index = new Stack<char>();
+            for (int i = 0; i < input.Length; i++)
+            {
+                char ch = input[i];
+                if (ch == '(' || ch == '{' || ch == '[')
+                {
+                    index.Push(ch);
+                }
+                else if (index.Count == 0)
+                {
+                    Console.WriteLine("NO");
+                    return;
+                }
+                else
+                {
+                    char last = index.Pop();
+                    char expected = pairsBrackets[last];
+                    if (ch != expected)
+                    {
+                        Console.WriteLine("NO");
+                        return;
+                    }
+                }
+            }
+
+            Console.WriteLine("YES");
+        }
+    }
+}
