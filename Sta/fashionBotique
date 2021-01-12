@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace fashionBotique
+{
+    class fashionBotique
+    {
+        static void Main(string[] args)
+        {
+            var arr = Console.ReadLine().Split().Select(int.Parse);
+            Stack<int> clothes = new Stack<int>(arr);
+            int capacity = int.Parse(Console.ReadLine());
+            int sum = 0;
+            int rack = 1;
+            while (clothes.Count > 0)
+            {
+                sum += clothes.Peek();
+                if (sum <= capacity)
+                {
+                    clothes.Pop();
+                }
+                else
+                {
+                    rack++;
+                    sum = 0;
+                }
+            }
+            Console.WriteLine(rack);
+        }
+    }
+}
