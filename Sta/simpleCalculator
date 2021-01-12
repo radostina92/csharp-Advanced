@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace simpleCalculator
+{
+    class simpleCalculator
+    {
+        static void Main(string[] args)
+        {
+            string input = Console.ReadLine();
+            string[] parts = input.Split();
+            Stack<string> partsNew = new Stack<string>(parts.Reverse());
+            var result = 0;
+            while (partsNew.Count > 0)
+            {
+                var element = partsNew.Pop();
+                if (element == "+")
+                {
+                    var number = partsNew.Pop();
+                    result += int.Parse(number);
+                }
+                else if (element == "-")
+                {
+                    var number = partsNew.Pop();
+                    result -= int.Parse(number);
+                }
+                else
+                {
+                    result = int.Parse(element);
+                }
+
+            }
+            Console.WriteLine(result);
+        }
+    }
+}
