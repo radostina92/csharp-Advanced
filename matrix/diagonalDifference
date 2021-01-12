@@ -1,0 +1,41 @@
+using System;
+
+namespace diagonalDifference
+{
+    class diagonalDifference
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            var matrix = new int[n, n];
+            for (int i = 0; i < n; i++)
+            {
+                var lines = Console.ReadLine();
+                var input = lines.Split();
+                for (int j = 0; j < n; j++)
+                {
+                    matrix[i, j] = int.Parse(input[j]);
+                }
+            }
+            int sum = 0;
+            int secondSum = 0;
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (i == j)
+                    {
+                        sum += matrix[i, j];
+                    }
+                    if (j == n - 1 - i)
+                    {
+                        secondSum += matrix[i, j];
+                    }
+                   
+                }
+            }
+
+            Console.WriteLine(Math.Abs(sum - secondSum));
+        }
+    }
+}
