@@ -1,0 +1,28 @@
+using System;
+
+namespace primaryDiagonal
+{
+    class primeryDiagonal
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            var matrix = new int[n, n];
+            int sum = 0;
+            for (int i = 0; i < n; i++)
+            {
+                var line = Console.ReadLine();
+                var rows = line.Split();
+                for (int j = 0; j < n; j++)
+                {
+                    matrix[i, j] = int.Parse(rows[j]);
+                    if (i == j)
+                    {
+                        sum += matrix[i, j];
+                    }
+                }
+            }
+            Console.WriteLine(sum);
+        }
+    }
+}
