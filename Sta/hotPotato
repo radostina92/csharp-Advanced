@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+
+namespace hotPotato
+{
+    class hotPotato
+    {
+        static void Main(string[] args)
+        {
+            var children = Console.ReadLine().Split();
+            var number = int.Parse(Console.ReadLine());
+            Queue<string> names = new Queue<string>(children);
+            while (names.Count != 1)
+            {
+                for (int i = 1; i < number; i++)
+                {
+                    names.Enqueue(names.Dequeue());
+                }
+                Console.WriteLine($"Removed {names.Dequeue()}");
+            }
+            Console.WriteLine($"Last is {names.Dequeue()}");
+        }
+    }
+}
