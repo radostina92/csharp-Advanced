@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+
+namespace setsOfElements
+{
+    class setsOfElements
+    {
+        static void Main(string[] args)
+        {
+            var input = Console.ReadLine().Split();
+            var first = int.Parse(input[0]);
+            var second = int.Parse(input[1]);
+            HashSet<int> numbers = new HashSet<int>();
+            HashSet<int> numsContains = new HashSet<int>();
+            for (int i = 0; i < first; i++)
+            {
+                var num = int.Parse(Console.ReadLine());
+                numbers.Add(num);
+            }
+
+            for (int i = 0; i < second; i++)
+            {
+                var num = int.Parse(Console.ReadLine());
+                
+                numsContains.Add(num);
+                
+            }
+
+            numbers.IntersectWith(numsContains);
+           
+            Console.WriteLine(string.Join(" ", numbers));
+           
+           
+        }
+    }
+}
