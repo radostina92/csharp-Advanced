@@ -1,0 +1,75 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace raanking
+{
+    class ranking
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<string, string> contset = new Dictionary<string, string>();
+            Dictionary<string, Dictionary<string, int>> valid = new Dictionary<string, Dictionary<string, int>>();
+            string command = string.Empty;
+
+            while ((command = Console.ReadLine()) != "end of contests")
+            {
+                var input = command.Split(":");
+                var name = input[0];
+                var password = input[1];
+                if (!contset.ContainsKey(name))
+                {
+                    contset.Add(name, password);
+                }
+               
+            }
+            string info = string.Empty;
+            while ((info = Console.ReadLine()) != "end of submissions")
+            {
+                var tokens = info.Split("=>");
+                var contests = tokens[0];
+                var pass = tokens[1];
+                var userName = tokens[2];
+                var points = int.Parse(tokens[3]);
+                if (contset.ContainsKey(contests) && contset[contests] == pass)
+                {
+                    if (!valid.ContainsKey(userName))
+                    {
+                        
+                        valid.Add(userName, new Dictionary<string, int>());
+                        valid[userName].Add(contests, points);
+                    }
+                    else if (!valid[userName].ContainsKey(contests))
+                    {
+                        valid[userName].Add(contests, points);
+                    }
+                    else
+                    {
+                        if (valid[userName][contests] < points)
+                        {
+                            valid[userName][contests] = points;
+                        }
+                    }
+                    
+                }
+
+            }
+            var newValid = valid.OrderByDescending(x => x.Value.Sum(x => x.Value));
+            foreach (var item in newValid)
+            {
+                Console.WriteLine($"Best candidate is {item.Key} with total {item.Value.Sum(x => x.Value)} points.");
+                break;
+            }
+            Console.WriteLine("Ranking:");
+            foreach (var item in valid.OrderBy(x=>x.Key))
+            {
+                
+                Console.WriteLine($"{item.Key}");
+                foreach (var kvp in item.Value.OrderByDescending(x=>x.Value))
+                {
+                    Console.WriteLine($"#  {kvp.Key} -> {kvp.Value}");
+                }
+            }
+        }
+    }
+}
