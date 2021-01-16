@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace theV_Logger
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string command = string.Empty;
+            Dictionary<string, Dictionary<string, List<string>>> vlogersFollowers = new Dictionary<string, Dictionary<string, List<string>>>();
+            
+            while ((command = Console.ReadLine()) != "Statistics")
+            {
+                var input = command.Split();
+                var vlogerName = input[0];
+                var logFollow = input[1];
+                if (logFollow == "joined")
+                {
+                    if (!vlogersFollowers.ContainsKey(vlogerName))
+                    {
+                        vlogersFollowers.Add(vlogerName, new Dictionary<string, List<string>>());
+                        vlogersFollowers[vlogerName].Add("followers", new List<string>());
+                        vlogersFollowers[vlogerName].Add("followings", new List<string>());
+                        
+                    }
+                    
+                }
+                else if (logFollow == "followed")
+                {
+                    var secondVloger = input[2];
+                    if (vlogersFollowers.ContainsKey(vlogerName) && vlogersFollowers.ContainsKey(secondVloger))
+                    {
+                        if (vlogersFollowers[vlogerName] != vlogersFollowers[secondVloger])
+                        {
+                            if (!vlogersFollowers[secondVloger]["followers"].Contains(vlogerName))
+                            {
+                                vlogersFollowers[secondVloger]["followers"].Add(vlogerName);
+                                vlogersFollowers[vlogerName]["followings"].Add(secondVloger);
+                            }
+                     
+                        }
+                    }
+                }
+            }
+            int cnt = 0;
+            int newCount = 1;
+            Console.WriteLine($"The V-Logger has a total of {vlogersFollowers.Count} vloggers in its logs.");
+            foreach (var item in vlogersFollowers.OrderByDescending(x=>x.Value["followers"].Count).ThenBy(x=>x.Value["followings"].Count))
+            {
+                
+                Console.WriteLine($"{newCount}. {item.Key} : {item.Value["followers"].Count} followers, {item.Value["followings"].Count} following");
+
+                if (cnt < 1)
+                {
+                    foreach (var kvp in item.Value)
+                    {
+                        if (kvp.Key == "followers")
+                        {
+                            foreach (var keyValue in kvp.Value.OrderBy(x=>x))
+                            {
+                                Console.WriteLine($"*  {keyValue}");
+                            }
+                            
+
+                        }
+
+                    }
+                }
+
+                cnt++;
+                newCount++;
+            }
+        }
+    }
+}
