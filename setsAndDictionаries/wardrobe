@@ -1,0 +1,80 @@
+using System;
+using System.Collections.Generic;
+
+namespace wardrobe
+{
+    class wardrobe
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+           
+            Dictionary<string, Dictionary<string, int>> count = new Dictionary<string, Dictionary<string, int>>();
+            for (int i = 0; i < n; i++)
+            {
+                var input = Console.ReadLine().Split(" -> ");
+                string color = input[0];
+                string[] items = input[1].Split(",");
+
+                if (!count.ContainsKey(color))
+                {
+                   
+                    count.Add(color, new Dictionary<string, int>());
+                    for (int j = 0; j < items.Length; j++)
+                    {
+                        
+
+                        if (!count[color].ContainsKey(items[j]))
+                        {
+                            count[color].Add(items[j], 1);
+                        }
+                        else
+                        {
+
+                            count[color][items[j]] += 1;
+                        }
+                        
+                    }
+                    
+                }
+                else
+                {
+                    for (int k = 0; k < items.Length; k++)
+                    {
+                        
+
+                        if (!count[color].ContainsKey(items[k]))
+                        {
+                            count[color].Add(items[k], 1);
+                        }
+                        else
+                        {
+
+                            count[color][items[k]] += 1;
+                        }
+                    }
+                }
+            }
+
+            string[] element = Console.ReadLine().Split();
+            string colour = element[0];
+            string elem = element[1];
+
+            foreach (var item in count)
+            {
+                Console.WriteLine($"{item.Key} clothes:");
+                foreach (var kvp in item.Value)
+                {
+                    if (kvp.Key == elem && item.Key == colour)
+                    {
+                        Console.WriteLine($"* {kvp.Key} - {kvp.Value} (found!)");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"* {kvp.Key} - {kvp.Value}");
+                    }
+                }
+            }
+        }
+    }
+}
