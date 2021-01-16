@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;
+
+namespace parkingLot
+{
+    class parkingLot
+    {
+        static void Main(string[] args)
+        {
+            string command = string.Empty;
+            HashSet<string> carNumber = new HashSet<string>();
+            while ((command = Console.ReadLine()) != "END")
+            {
+                var input = command.Split(", ");
+                var inOut = input[0];
+                var carNum = input[1];
+                if (inOut == "IN")
+                {
+                    carNumber.Add(carNum);
+                }
+                else if (inOut == "OUT")
+                {
+                    carNumber.Remove(carNum);
+                }
+            }
+
+            if (carNumber.Count > 0)
+            {
+                Console.WriteLine(string.Join("\n",carNumber));
+            }
+            else
+            {
+                Console.WriteLine("Parking Lot is Empty");
+            }
+        }
+    }
+}
