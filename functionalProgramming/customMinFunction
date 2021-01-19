@@ -1,0 +1,31 @@
+using System;
+using System.Linq;
+
+namespace customMinFunction
+{
+    class customMinFunction
+    {
+        static void Main(string[] args)
+        {
+            Func<int[], int> minFunc = inputNumbers =>
+            {
+                int minValue = int.MaxValue;
+                foreach (var item in inputNumbers)
+                {
+                    if (item < minValue)
+                    {
+                        minValue = item;
+                    }
+                }
+                return minValue;
+            };
+            int[] numbers = Console.ReadLine()
+                .Split()
+                .Select(int.Parse)
+                .ToArray();
+
+           int result = minFunc(numbers);
+            Console.WriteLine(result);
+        }
+    }
+}
