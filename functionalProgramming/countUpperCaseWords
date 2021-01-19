@@ -1,0 +1,21 @@
+using System;
+using System.Linq;
+using System.Text;
+
+namespace countUpperCaseWords
+{
+    class countupperCaseWords
+    {
+        static void Main(string[] args)
+        {
+            Func<string, bool> checker = n => n[0] == n.ToUpper()[0];
+            var words = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries)
+                .Where(checker).ToArray();
+            foreach (var item in words)
+            {
+                Console.WriteLine(item);
+            }
+            
+        }
+    }
+}
