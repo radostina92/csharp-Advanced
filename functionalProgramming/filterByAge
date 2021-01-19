@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace filterByAge
+{
+    class Person
+    {
+        public Person(string name, int age)
+        {
+            Name = name;
+            Age = age;
+        }
+        public string Name { get; set; }
+        public int Age { get; set; }
+    }
+    class filterByAge
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            List<Person> people = new List<Person>();
+            for (int i = 0; i < n; i++)
+            {
+                var input = Console.ReadLine().Split(", ");
+                var name = input[0];
+                var age = int.Parse(input[1]);
+                Person person = new Person(name, age);
+                people.Add(person);
+               
+
+            }
+
+            var command = Console.ReadLine();
+            var num = int.Parse(Console.ReadLine());
+            var condition = Console.ReadLine();
+            Func<Person, bool> predicate = null;
+            if (command == "older")
+            {
+                predicate = x => x.Age >= num;
+            }
+            else if (command == "younger")
+            {
+                predicate = x => x.Age < num;
+            }
+
+            var filtered = people.Where(predicate);
+
+            foreach (var item in filtered)
+            {
+                if (condition.Contains("name") && condition.Length == 4)
+                {
+                    Console.WriteLine($"{item.Name}");
+                }
+                else if (condition.Contains("age") && condition.Length == 3)
+                {
+                    Console.WriteLine($"{item.Age}");
+                }
+                else
+                {
+                    Console.WriteLine($"{item.Name} - {item.Age}");
+                }
+            }
+        }
+    }
+}
