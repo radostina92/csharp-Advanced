@@ -1,0 +1,18 @@
+using System;
+using System.Linq;
+
+namespace addVAT
+{
+    class addVAT
+    {
+        static void Main(string[] args)
+        {
+            var input = Console.ReadLine().Split(", ").Select(double.Parse)
+                .Select(x => x + (x * 0.2));
+            foreach (var item in input)
+            {
+                Console.WriteLine($"{item:f2}");
+            }
+        }
+    }
+}
