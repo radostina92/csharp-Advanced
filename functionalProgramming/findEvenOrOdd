@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace findEvenOrOdd
+{
+    class findEvenOrOdd
+    {
+        static void Main(string[] args)
+        {
+            Predicate<int> isEvenNumber = num => num % 2 == 0;
+            Action<int[]> printNumbers = number => Console.WriteLine(string.Join(" ",number ));
+            var input = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            var start = input[0];
+            var end = input[1];
+            List<int> nums = new List<int>();
+            for (int i = start; i <= end; i++)
+            {
+                nums.Add(i);
+            }
+
+            string command = Console.ReadLine();
+            
+
+            if (command == "even")
+            {
+                nums.RemoveAll(x => !isEvenNumber(x));
+            }
+            else if (command == "odd")
+            {
+                nums.RemoveAll(x => isEvenNumber(x));
+            }
+
+            printNumbers(nums.ToArray());
+        }
+    }
+}
