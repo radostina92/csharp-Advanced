@@ -1,0 +1,20 @@
+using System;
+
+namespace actionPoint
+{
+    class actionPoint
+    {
+        static void Main(string[] args)
+        {
+            
+            Action<string[]> print = items => Console.WriteLine(string.Join("\n", items));
+            var names = Console.ReadLine().Split();
+            print(names);
+
+
+
+        }
+
+        
+    }
+}
