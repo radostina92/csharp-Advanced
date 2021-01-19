@@ -1,0 +1,66 @@
+using System;
+using System.Linq;
+
+namespace appliedAritmethics
+{
+    class appliedAritmethics
+    {
+        static void Main(string[] args)
+        {
+            var input = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            var command = string.Empty;
+            Func<int[], int[]> operation = nums => nums;
+            while ((command = Console.ReadLine()) != "end")
+            {
+                if (command == "add")
+                {
+                    operation = PrintAdd;
+                    operation(input);
+                }
+                else if (command == "subtract")
+                {
+                    operation = Subtract;
+                    operation(input);
+                }
+                else if (command == "multiply")
+                {
+                    operation = MultiplyBy2;
+                    operation(input);
+                }
+                else if (command == "print")
+                {
+                    Console.WriteLine(string.Join(" ",input));
+                }
+            }
+            
+        }
+
+        private static int[] PrintAdd(int[] arg)
+        {
+            for (int i = 0; i < arg.Length; i++)
+            {
+                arg[i] += 1;
+            }
+            
+            return arg;
+        }
+
+        private static int[] MultiplyBy2(int[] arg)
+        {
+            for (int i = 0; i < arg.Length; i++)
+            {
+                arg[i] *= 2;
+            }
+            return arg;
+        }
+
+        private static int[] Subtract(int[] arg)
+        {
+            for (int i = 0; i < arg.Length; i++)
+            {
+                arg[i] -= 1;
+            }
+            return arg;
+        }
+    }
+}
