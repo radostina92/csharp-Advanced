@@ -1,0 +1,17 @@
+using System;
+
+namespace dates
+{
+    public class StartUp
+    {
+        static void Main(string[] args)
+        {
+
+            string firstDate = Console.ReadLine();
+            string secondDate = Console.ReadLine();
+            DateModifier dateModifier = new DateModifier();
+            double result = dateModifier.CalculateDifference(firstDate, secondDate);
+            Console.WriteLine(result);
+        }
+    }
+}
