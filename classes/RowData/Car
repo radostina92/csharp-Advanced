@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace RowData
+{
+    public class Car
+    {
+        private string model;
+        private Engine engine;
+        private Cargo cargo;
+        private Tire[] tire;
+
+        public Car(string model, Engine engine, Cargo cargo, Tire[] tire)
+        {
+            Model = model;
+            Engine = engine;
+            Cargo = cargo;
+            Tire = tire;
+        }
+
+        public string Model
+        {
+            get { return model; }
+            set { model = value; }
+        }
+
+        
+
+        public Engine Engine
+        {
+            get { return engine; }
+            set { engine = value; }
+        }
+
+        
+
+        public Cargo Cargo
+        {
+            get { return cargo; }
+            set { cargo = value; }
+        }
+
+        
+
+        public Tire[] Tire
+        {
+            get { return tire; }
+            set { tire = value; }
+        }
+
+
+
+
+    }
+}
