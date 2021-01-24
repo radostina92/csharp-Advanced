@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace DefiningClasses
+{
+    public class Family
+    {
+        private List<Person> people;
+        public Family()
+        {
+            this.people = new List<Person>();
+        }
+
+      
+
+        public void AddMember(Person person)
+        {
+            if (person.Age > 30)
+            {
+                this.people.Add(person);
+            }
+            
+        }
+
+        public void PrintMember()
+        {
+            foreach (var item in people.OrderBy(x=>x.Name))
+            {
+                Console.WriteLine($"{item.Name} - {item.Age}");
+            }
+        }
+     
+    }
+}
