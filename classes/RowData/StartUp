@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace RowData
+{
+    public class StartUp
+    {
+        public static void Main(string[] args)
+        {
+            List<Car> cars = new List<Car>();
+            int n = int.Parse(Console.ReadLine());
+            for (int i = 0; i < n; i++)
+            {
+                var input = Console.ReadLine().Split();
+                string model = input[0];
+                int engineSpeed = int.Parse(input[1]);
+                int enginePower = int.Parse(input[2]);
+
+                Engine engine = new Engine(engineSpeed, enginePower);
+                int cargoWeight = int.Parse(input[3]);
+                string cargoType = input[4];
+
+                Cargo cargo = new Cargo(cargoWeight, cargoType);
+             
+
+                var tires = new Tire[4];
+                int counter = 0;
+                for (int j = 5; j < input.Length; j+=2)
+                {
+                    double currTirePressure = double.Parse(input[j]);
+                    int currAge = int.Parse(input[j + 1]);
+
+                    Tire tire = new Tire(currTirePressure, currAge);
+                    tires[counter++] = tire;
+
+                }
+                Car car = new Car(model, engine, cargo, tires);
+                cars.Add(car);
+            }
+
+            string cargoTypes = Console.ReadLine();
+            if (cargoTypes == "fragile")
+            {
+                cars.Where(x => x.Cargo.CargoType == "fragile" && x.Tire.Any(p => p.TirePressure < 1))
+                    .ToList()
+                    .ForEach(x => Console.WriteLine(x.Model));
+            }
+            else if (cargoTypes == "flamable")
+            {
+                cars.Where(x => x.Engine.EnginePower > 250 && x.Cargo.CargoType == "flamable").ToList()
+                    .ForEach(x => Console.WriteLine(x.Model));
+            }
+        }
+    }
+}
