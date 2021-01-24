@@ -1,0 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace dates
+{
+   public class DateModifier
+    {
+        public double CalculateDifference(string firstDate, string secondDate)
+        {
+            DateTime startDate = DateTime.Parse(firstDate);
+            DateTime endDate = DateTime.Parse(secondDate);
+            var test = (startDate - endDate).TotalDays;
+            var absoluteValue = Math.Abs(test);
+            return absoluteValue;
+        }
+    }
+}
